@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useLayoutEffect} from 'react';
 
 const customers = [
     {
@@ -19,6 +19,13 @@ const customers = [
     }];
 
 const Customers = () => {
+    const [customers, setCustomers] = useState([]);
+
+    useLayoutEffect(() => {
+        const getCustsomer = async() => {
+            const res = await fetch('/api/customers')
+        }
+    })
     return (
         <table>
             <thead>
@@ -32,7 +39,7 @@ const Customers = () => {
             <tbody>
                 {customers.map(customer => {
                     const {
-                        customerId,
+                        id,
                         firstName,
                         lastName,
                         emailAddress,
@@ -40,8 +47,8 @@ const Customers = () => {
                         address
                     } = customer;
                     return (
-                        <tr key={ customerId} >
-                            <td>{customerId}</td>
+                        <tr key={id} >
+                            <td>{id}</td>
                             <td>{firstName}</td>
                             <td>{lastName}</td>
                             <td>{emailAddress}</td>

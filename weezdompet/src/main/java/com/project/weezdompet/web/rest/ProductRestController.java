@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/products")
+@RequestMapping("/api")
 public class ProductRestController {
     private final ProductService productService;
 
@@ -22,18 +22,18 @@ public class ProductRestController {
         return this.productService.getAllProducts();
     }
 
-    @GetMapping("/products/{id}")
+    @GetMapping("/product/{id}")
     public Product getProduct(@PathVariable("id") long id) {
         return this.productService.getProduct(id);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/createProduct{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public Product createProduct(@RequestBody Product product) {
         return this.productService.createOrUpdateProduct(product);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateProduct/{id}")
     public Product updateProduct(@PathVariable("id") long id, @RequestBody Product product) {
         if (id != product.getProductId() ) {
             throw new BadRequestException("Product id mismatch");
@@ -41,7 +41,7 @@ public class ProductRestController {
         return this.productService.createOrUpdateProduct(product);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteProduct/{id}")
     @ResponseStatus(HttpStatus.RESET_CONTENT)
     public void deleteProduct(@PathVariable("id") long id) {
         this.productService.deleteProduct(id);

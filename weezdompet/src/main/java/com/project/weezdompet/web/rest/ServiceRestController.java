@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/services")
+@RequestMapping("/api")
 public class ServiceRestController {
     
     private final ServiceService serviceService;
@@ -18,23 +18,23 @@ public class ServiceRestController {
         this.serviceService = serviceService;
     }
 
-    @GetMapping("/services")
+    @GetMapping("/services}")
     public List<Service> getServices() {
         return this.serviceService.getAllServices();
     }
 
-    @GetMapping("/services/{id}")
+    @GetMapping("/service/{id}")
     public Service getService(@PathVariable("id") long id) {
         return this.serviceService.getService(id);
     }
 
-    @PostMapping("/{id}")
+    @PostMapping("/createService/{id}")
     @ResponseStatus(HttpStatus.CREATED)
     public Service createService(@RequestBody Service service) {
         return this.serviceService.createOrUpdateService(service);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateService{id}")
     public Service updateService(@PathVariable("id") long id, @RequestBody Service service) {
         if (id != service.getServiceId() ) {
             throw new BadRequestException("Service id mismatch");
@@ -42,7 +42,7 @@ public class ServiceRestController {
         return this.serviceService.createOrUpdateService(service);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteService/{id}")
     @ResponseStatus(HttpStatus.RESET_CONTENT)
     public void deleteService(@PathVariable("id") long id) {
         this.serviceService.deleteService(id);

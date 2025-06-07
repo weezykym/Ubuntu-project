@@ -18,7 +18,7 @@ public class ServiceRestController {
         this.serviceService = serviceService;
     }
 
-    @GetMapping("/services}")
+    @GetMapping("/services")
     public List<Service> getServices() {
         return this.serviceService.getAllServices();
     }

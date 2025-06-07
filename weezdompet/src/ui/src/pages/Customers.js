@@ -1,4 +1,4 @@
-import React, {useLayoutEffect} from 'react';
+import React, {useLayoutEffect, useState} from 'react';
 
 const customers = [
     {
@@ -22,9 +22,14 @@ const Customers = () => {
     const [customers, setCustomers] = useState([]);
 
     useLayoutEffect(() => {
-        const getCustsomer = async() => {
-            const res = await fetch('/api/customers')
+        const getCustomers = async() => {
+            const res = await fetch('/api/customers');
+            const customers = await res.json();
+            setCustomers(customers);
         }
+        getCustomers().catch(e => {
+            console.log('error fetching customers: ' + e);
+        })
     })
     return (
         <table>

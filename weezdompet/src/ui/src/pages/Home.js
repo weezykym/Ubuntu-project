@@ -8,6 +8,9 @@ const Home = () => {
             <ul style={{liststyleType: 'none'}}>
                 <li>
                     <Link to={'/customers'}>Customers</Link>
+                    <Link to={'/products'}>Products</Link>
+                    <Link to={'/services'}>Services</Link>
+                    <Link to={'/vendors'}>Vendors</Link>
                 </li>
             </ul>
         </>
